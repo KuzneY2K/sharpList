@@ -13,41 +13,44 @@ namespace server.Controllers;
 [Route("api/[controller]")]
 public class CarsController : ControllerBase
 {
-private readonly CarsService _carsService;
+  private readonly CarsService _carsService;
 
-    public CarsController(CarsService carsService)
+  public CarsController(CarsService carsService)
+  {
+    _carsService = carsService;
+  }
+
+  [HttpGet]
+  public ActionResult<List<Car>> GetAllCars()
+  {
+    try
     {
-        _carsService = carsService;
+      List<Car> cars = _carsService.GetAllCars();
+      return Ok(cars);
     }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 
-    [HttpGet]
-    public ActionResult<List<Car>> GetAllCars(){
-      try
-      {
-        List<Car> cars = _carsService.GetAllCars();
-        return Ok(cars);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
+  [HttpGet("{carId}")]
+  public ActionResult<Car> GetCarById(int carId)
+  {
+    try
+    {
+      Car car = _carsService.GetCarById(carId);
+      return Ok(car);
     }
-
-    [HttpGet("{carId}")]
-    public ActionResult<Car> GetCarById(int carId){
-      try
-      {
-        Car car = _carsService.GetCarById(carId);
-        return Ok(car);
-      }
-     catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
     }
+  }
 
   [HttpPost]
-  public ActionResult<Car> CreateCar([FromBody] Car carData){
+  public ActionResult<Car> CreateCar([FromBody] Car carData)
+  {
     try
     {
       Car car = _carsService.CreateCar(carData);
@@ -60,7 +63,8 @@ private readonly CarsService _carsService;
   }
 
   [HttpPut("{carId}")]
-  public ActionResult<Car> UpdateCar( [FromBody]Car updateData, int carId){
+  public ActionResult<Car> UpdateCar([FromBody] Car updateData, int carId)
+  {
     try
     {
       updateData.Id = carId;
@@ -74,13 +78,14 @@ private readonly CarsService _carsService;
   }
 
   [HttpDelete("{carId}")]
-  public ActionResult<string> RemoveCar(int carId){
+  public ActionResult<string> RemoveCar(int carId)
+  {
     try
     {
       string message = _carsService.RemoveCar(carId);
       return Ok(message);
     }
-     catch (Exception e)
+    catch (Exception e)
     {
       return BadRequest(e.Message);
     }
