@@ -147,7 +147,7 @@ CREATE TABLE
 
 CREATE TABLE
     houses(
-        id BIGINT NOT NULL,
+        id CHAR(36),
         sqft INT NOT NULL,
         bedrooms INT NOT NULL,
         bathrooms INT NOT NULL,
@@ -168,12 +168,12 @@ INSERT INTO
     )
 VALUES (
         1,
-        4000,
-        6,
-        8,
+        600,
+        2,
+        1,
         'https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-        'GOOD HOUSE VERY BIG OK GREATE THANKS',
-        600400
+        'BADDD SHAK',
+        40000
     )
 
 DROP TABLE houses;
